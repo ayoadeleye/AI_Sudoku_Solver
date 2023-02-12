@@ -37,6 +37,15 @@ def upload_image():
 
         flash('Image successfully uploaded and displayed')
 
+        cv_image = cv2.imread(image.filename)
+        # Perform the image processing operations
+        gray_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2GRAY)
+        threshold_image = cv2.threshold(cv_image, 100, 255, cv2.THRESH_BINARY)
+        edge_image = cv2.Canny(cv_image, 50, 150)
+
+        # Save the processed image to disk
+        cv2.imwrite(filename, edge_image)
+
     return render_template("index.html")
 
 
