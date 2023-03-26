@@ -49,7 +49,6 @@ def upload_image():
         cv2.imwrite(processed_path, edge_image)
 
     return render_template("index.html")
-Note that I also used os.path.splitex
 
 
 if __name__ == '__main__':
