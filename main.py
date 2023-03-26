@@ -37,16 +37,19 @@ def upload_image():
 
         flash('Image successfully uploaded and displayed')
 
-        cv_image = cv2.imread(image.filename)
+        cv_image = cv2.imread(full_path)
         # Perform the image processing operations
         gray_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2GRAY)
-        threshold_image = cv2.threshold(cv_image, 100, 255, cv2.THRESH_BINARY)
-        edge_image = cv2.Canny(cv_image, 50, 150)
+        _, threshold_image = cv2.threshold(gray_image, 100, 255, cv2.THRESH_BINARY)
+        edge_image = cv2.Canny(gray_image, 50, 150)
 
         # Save the processed image to disk
-        cv2.imwrite(filename, edge_image)
+        processed_filename = os.path.splitext(filename)[0] + "_processed.jpg"
+        processed_path = os.path.join(app.config['UPLOAD_FOLDER'], processed_filename)
+        cv2.imwrite(processed_path, edge_image)
 
     return render_template("index.html")
+Note that I also used os.path.splitex
 
 
 if __name__ == '__main__':
