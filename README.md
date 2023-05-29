@@ -1,6 +1,5 @@
 # AI_Sudoku_Solver
 
-###### NONE OF THIS WORKS YET smh
 
 How to run:
 
